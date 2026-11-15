@@ -1,0 +1,15 @@
+.git
+.venv
+work
+shared
+scratch
+library-files
+.agents
+.aws
+.codex
+__pycache__
+**/__pycache__
+*.egg-info
+.pytest_cache
+.env
+.env.*
