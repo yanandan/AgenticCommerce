@@ -6,6 +6,15 @@ let products = [], sport = '', query = '', page = 1;
 const pageSize = 24;
 const money = new Intl.NumberFormat('en-US', {style:'currency',currency:'USD'});
 function el(tag, cls, value) { const e = document.createElement(tag); if(cls) e.className = cls; if(value !== undefined) e.textContent = value; return e; }
+export function productCard(p) {
+    const card = el('article','product-card');
+    const art = el('div','product-art'); art.style.setProperty('--tint',tints[(Number(p.id.slice(3))-1)%tints.length]);
+    const symbol=el('span','sport-art',symbols[p.category] || '✦'); symbol.setAttribute('aria-hidden','true');
+    art.append(el('span','sport-label',p.category),symbol,el('span','art-index',p.id));
+    const body=el('div','card-body');
+    body.append(el('p','card-brand',p.brand),el('h3','',p.name.startsWith(p.brand+' ') ? p.name.slice(p.brand.length+1) : p.name),el('p','card-description',p.description));
+    const bottom=el('div','card-bottom');bottom.append(el('span','price',money.format(p.price_cents/100)),el('span','','USD · SYNTHETIC'));body.append(bottom);card.append(art,body);return card;
+}
 function chooseSport(value) { sport = value; $('sport').value = value; page = 1; render(); }
 function render() {
   const matches = searchProducts(products, query, sport, $('sort').value);
@@ -16,13 +25,7 @@ function render() {
   for (const button of $('sport-list').children) { const selected = button.dataset.sport === sport; button.classList.toggle('active', selected); button.setAttribute('aria-pressed', String(selected)); }
   $('grid').replaceChildren();
   for (const p of matches.slice((page - 1) * pageSize, page * pageSize)) {
-    const card = el('article','product-card');
-    const art = el('div','product-art'); art.style.setProperty('--tint',tints[(Number(p.id.slice(3))-1)%tints.length]);
-    const symbol=el('span','sport-art',symbols[p.category] || '✦'); symbol.setAttribute('aria-hidden','true');
-    art.append(el('span','sport-label',p.category),symbol,el('span','art-index',p.id));
-    const body=el('div','card-body');
-    body.append(el('p','card-brand',p.brand),el('h3','',p.name.startsWith(p.brand+' ') ? p.name.slice(p.brand.length+1) : p.name),el('p','card-description',p.description));
-    const bottom=el('div','card-bottom');bottom.append(el('span','price',money.format(p.price_cents/100)),el('span','','USD · SYNTHETIC'));body.append(bottom);card.append(art,body);$('grid').append(card);
+    $('grid').append(productCard(p));
   }
   $('empty').hidden = matches.length !== 0;
   document.querySelector('.pagination').hidden = matches.length === 0;

@@ -7,10 +7,20 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<header><a class="brand" href="./" aria-label="CommerceOS home"><span class="logo">C<span>↗</span></span>Commerce<span class="os">OS</span></a><span class="header-note">THE SPORTS CATALOG <i></i> FOUNDATION 01</span><span class="demo-badge">SYNTHETIC CATALOG</span></header>
+<header><a class="brand" href="./" aria-label="CommerceOS home"><span class="logo">C<span>↗</span></span>Commerce<span class="os">OS</span></a><span class="header-note">THE SPORTS CATALOG <i></i> SHOPPING REQUESTS 02</span><span class="demo-badge">SYNTHETIC CATALOG</span></header>
 <main>
 <section class="hero"><div class="hero-copy"><p class="eyebrow">YOUR GAME. YOUR STYLE. YOUR NEXT ADVENTURE.</p><h1>More ways to play.<br><span>More to discover.</span></h1><p class="hero-description">Fresh gear, active essentials, and gifts worth giving.<br>Explore eleven collections for every part of your day.</p><div class="hero-stats"><span><b>300</b> products</span><span><b>11</b> categories</span><span><b>One</b> place to explore</span></div></div><div class="court" aria-hidden="true"><svg viewBox="0 0 500 340"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="30" y="25" width="440" height="290" rx="3"/><path d="M250 25v290"/><circle cx="250" cy="170" r="60"/><path d="M30 80h90v180H30m440-180h-90v180h90"/><path d="M120 110a65 65 0 0 1 0 120m260-120a65 65 0 0 0 0 120"/><circle cx="70" cy="170" r="12"/><circle cx="430" cy="170" r="12"/></g></svg><div class="court-ball">✦</div><span class="court-label">BUILT FOR THE LOVE OF SPORT ↗</span></div></section>
-<section class="catalog" aria-label="Product catalog">
+<nav class="view-switch" aria-label="Shopping view"><button id="view-chat" class="selected" aria-pressed="true">Shopping chat <span>NEW</span></button><button id="view-browse" aria-pressed="false">Browse catalog</button></nav>
+<section id="shopping-chat" class="shopping-chat" aria-label="Shopping chat">
+<div class="chat-intro"><p class="eyebrow">TELL US WHAT YOU HAVE IN MIND</p><h2>Your next find starts here.</h2><p>Describe what you need. We’ll show the requirements we recognize, then look for products that match all of them.</p><span class="rule-badge">RULE-BASED SEARCH · NO AI MODEL</span></div>
+<div id="chat-history" class="chat-history" role="log" aria-label="Shopping conversation"></div>
+<div class="chat-examples"><button type="button" data-example="Show me running shoes under $150">Running shoes under $150 ↗</button><button type="button" data-example="I need wide running shoes for marathon training">Wide shoes for marathon training ↗</button><button type="button" data-example="Find hiking products under $100">Hiking products under $100 ↗</button></div>
+<form id="chat-form"><label class="chat-input-label" for="chat-request">Your shopping request</label><div class="chat-input-row"><textarea id="chat-request" maxlength="500" rows="2" placeholder="Show me running shoes under $150" required></textarea><button class="search-button" id="chat-send" type="submit">Find products ↗</button></div></form>
+<p id="chat-status" role="status" aria-live="polite"></p>
+<div class="chat-footnote"><p>Each message starts a fresh search. Include all your requirements when refining.</p><button id="chat-clear" type="button">Clear conversation</button></div>
+<p class="catalog-limit">Width isn’t recorded in this catalog. Use cases require explicit catalog wording; product suitability is never assumed.</p>
+</section>
+<section id="catalog-browse" class="catalog" aria-label="Product catalog" hidden>
 <aside><div class="aside-title">SHOP BY CATEGORY <span>11</span></div><label class="mobile-label" for="sport">Category</label><select id="sport"><option value="">All categories</option></select><nav id="sport-list" aria-label="Filter by category"></nav><div class="aside-note"><span>↗</span><b>A place to start.</b><p>A fictional catalog made for discovering what’s possible.</p></div></aside>
 <div class="products-panel"><div class="section-heading"><div><p class="eyebrow">THE COLLECTION</p><h2 id="collection-title">Find something for your everyday.</h2></div><span class="collection-index">001 — 300</span></div>
 <form id="search-form" role="search"><label class="search-wrap"><span aria-hidden="true">⌕</span><input id="query" type="search" maxlength="200" aria-label="Search products" placeholder="Search products, categories, or brands…" autocomplete="off"></label><button class="search-button" type="submit">Search <span aria-hidden="true">↗</span></button></form>
@@ -22,4 +32,5 @@
 </div></section>
 </main><footer><a class="brand" href="./">Commerce<span class="os">OS</span></a><p>300 fictional products. Illustrative USD prices. No checkout or retailer affiliation.</p><span>MADE FOR YOUR NEXT MOVE ↗</span></footer>
 <script type="module" src="app.js"></script>
+<script type="module" src="chat.js"></script>
 </body></html>
